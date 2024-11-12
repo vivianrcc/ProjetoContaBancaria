@@ -1,4 +1,0 @@
-INDEX VERSION 1.134+C:\Users\Henri\projetos\ProjetoContaBancaria\.metadata\.plugins\org.eclipse.jdt.core
-1058302365.index
-1865797976.index
-1157007601.index
