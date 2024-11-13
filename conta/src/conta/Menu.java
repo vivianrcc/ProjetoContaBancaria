@@ -3,25 +3,16 @@ package conta;
 import java.util.Scanner;
 import conta.model.ContaCorrente;
 import conta.model.ContaPoupanca;
-import conta.model.Conta;
 import conta.util.Cores;
 
 public class Menu {
 
 	public static void main(String[] args) {
 
-		// TESTE CLASSE CONTA
-		Conta c1 = new Conta(1, 123, 1, "Adriana", 10000.0f);
-		c1.visualizar();
-		c1.sacar(12000.0f);
-		c1.visualizar();
-		c1.depositar(5000.0f);
-		c1.visualizar();
-
 		// TESTE DE CONTA CORRENTE
-		ContaCorrente cc1 = new ContaCorrente(3, 234, 5, "VIVIAN", 0.0f, 1000.0f);
+		ContaCorrente cc1 = new ContaCorrente(3, 234, 5, "VIVIAN", 0.0f, 10000.0f);
 		cc1.visualizar();
-		cc1.sacar(12000.0f);
+		cc1.sacar(10000.0f);
 		cc1.visualizar();
 		cc1.depositar(5000.0f);
 		cc1.visualizar();
