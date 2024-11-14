@@ -19,7 +19,7 @@ public class Menu {
 		int opcao, numero, agencia, tipo, aniversario;
 		String titular;
 		float saldo, limite;
-		
+
 		ContaCorrente cc1 = new ContaCorrente(contas.gerarNumero(), 123, 1, "João da Silva", 1000f, 100.0f);
 		contas.cadastrar(cc1);
 
@@ -31,7 +31,7 @@ public class Menu {
 
 		ContaPoupanca cp2 = new ContaPoupanca(contas.gerarNumero(), 125, 2, "Juliana Ramos", 8000f, 15);
 		contas.cadastrar(cp2);
-		
+
 		contas.listarTodas();
 
 		while (true) {
@@ -89,15 +89,18 @@ public class Menu {
 
 				System.out.println("Digite o Saldo da Conta (R$): ");
 				saldo = scanner.nextFloat();
+
 				switch (tipo) {
 				case 1 -> {
 					System.out.println("Digite o Limite de Crédito (R$): ");
 					limite = scanner.nextFloat();
+
 					contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
 				}
 				case 2 -> {
 					System.out.println("Digite o Aniversário da Conta: ");
 					aniversario = scanner.nextInt();
+
 					contas.cadastrar(
 							new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
 				}
@@ -105,6 +108,7 @@ public class Menu {
 
 				keyPress();
 				break;
+
 			case 2:
 				System.out.println(Cores.TEXT_WHITE + "Listar todas as Contas\n\n");
 				contas.listarTodas();
@@ -112,16 +116,61 @@ public class Menu {
 				break;
 			case 3:
 				System.out.println(Cores.TEXT_WHITE + "Consultar dados da Conta - por número\n\n");
+				System.out.println("Digite o número da Conta: ");// ENTRADA DE DADOS PARA A VAR NUM QUE VAI SER
+																	// PROCURADA NA LISTACONTAS
+				numero = scanner.nextInt();
+
+				contas.procurarPorNumero(numero);
 
 				keyPress();
 				break;
 			case 4:
 				System.out.println(Cores.TEXT_WHITE + "Atualizar dados da Conta\n\n");
+				System.out.println("Digite o número da conta: ");
+				numero = scanner.nextInt();
+
+				var buscaConta = contas.buscarNaCollection(numero);
+
+				if (buscaConta != null) {
+
+					tipo = buscaConta.getTipo();
+
+					System.out.println("Digite o Numero da Agência: ");
+					agencia = scanner.nextInt();
+					System.out.println("Digite o Nome do Titular: ");
+					scanner.skip("\\R?");
+					titular = scanner.nextLine();
+					System.out.println("Digite o valor do Saldo da Conta (R$): ");
+					saldo = scanner.nextFloat();
+
+					switch (tipo) {
+					case 1 -> {
+						System.out.println("Digite o Limite de Crédito (R$): ");
+						limite = scanner.nextFloat();
+						contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite));
+					}
+					case 2 -> {
+						System.out.println("Digite o dia do Aniversario da Conta: ");
+						aniversario = scanner.nextInt();
+						contas.atualizar(new ContaPoupanca(numero, agencia, tipo, titular, saldo, aniversario));
+					}
+					default -> {
+						System.out.println("Tipo de conta inválido!");
+					}
+					}
+
+				} else
+					System.out.println("\nConta não encontrada!");
 
 				keyPress();
 				break;
 			case 5:
 				System.out.println(Cores.TEXT_WHITE + "Apagar a Conta\n\n");
+
+				System.out.println("Digite o número da conta: ");
+				numero = scanner.nextInt();
+
+				contas.deletar(numero);
 
 				keyPress();
 				break;
